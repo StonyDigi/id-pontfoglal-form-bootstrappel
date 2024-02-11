@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Időpontfoglaló Űrlap</title>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <form action="https://sheetdb.io/api/v1/here your api key"  id="sheetdb-form" class="form-control w-50 d-flex justify-content-center flex-column">
+            <h3 class="mb-1 text-center">Időpontfoglaló Űrlap</h3>
+            <p class="text-center">Gárdonyi Géza Ciszterci Gimnázium és Kollégium</p>
+            <label class="form-label">Név:</label>
+            <input type="text" class="form-control w-100 mt-2 mb-2" name="data[name]">
+            <label class="form-label">E-mail:</label>
+            <input type="email" class="form-control w-100 mt-2 mb-2" name="data[email]">
+            <label class="form-label">Dátum:</label>
+            <input type="date" class="form-control w-100 mt-2 mb-2" name="data[date]">
+            <div class="mb-3">
+                <label for="time" class="form-label">Időpont:</label>
+                <select class="form-select" name="data[time]" id="timeSelect">
+                    <option value="08:00" data-time="08:00">08:00</option>
+                    <option value="09:00" data-time="09:00">09:00</option>
+                    <option value="10:00" data-time="10:00">10:00</option>
+                    <option value="11:00" data-time="11:00">11:00</option>
+                    <option value="12:00" data-time="12:00">12:00</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success m-5">Elküld</button>
+        </form>
+    </div>
+
+    <script>
+        var form = document.getElementById('sheetdb-form');
+        form.addEventListener("submit", e => {
+          e.preventDefault();
+          fetch(form.action, {
+              method : "POST",
+              body: new FormData(document.getElementById("sheetdb-form")),
+          }).then(
+              response => response.json()
+          ).then((html) => {
+            // you can put any JS code here
+            alert('Sikeres beküldés! Köszönjük.')
+          });
+        });
+      </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
